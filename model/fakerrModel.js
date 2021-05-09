@@ -16,6 +16,6 @@ const fakerrSchema = mongoose.Schema(
 
 fakerrSchema.index({ companyName: 1, companyAddress: 1 });
 
-const fakerrModel = mongoose.model('fakeJobs', fakerrSchema);
+const fakerrModel = mongoose.model('fakejobs', fakerrSchema);
 
 export default fakerrModel;

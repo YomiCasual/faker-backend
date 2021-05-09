@@ -4,8 +4,12 @@ import mongoose from 'mongoose';
 
 import connection from './db/index.js';
 import fakerrRoute from './routes/fakerrRoute.js';
+import dotenv from 'dotenv';
 
 const app = express();
+
+dotenv.config();
+
 
 app.use(cors());
 app.use(express.json());
@@ -21,16 +25,17 @@ app.use('/api/v1/', fakerrRoute);
 
 const db = mongoose.connection;
 
-const PORT = process.env.PORT || 	5000;
+const PORT = process.env.PORT || 5000;
 
-// process.on("unhandledRejection", err => {
-// 	console.log("UNHANDLED REJECTION")
-// 	console.loog(err.name, err.message)
-// 	app.close(() => {
-// 		process.exit(1)
-// 	})
-// })
 
-app.listen(PORT, () => {
+const Server = app.listen(PORT, () => {
 	console.log('Listening on Port 5000');
 });
+
+process.on("unhandledRejection", err => {
+	console.log("UNHANDLED REJECTION")
+	console.loog(err.name, err.message)
+	Server.close(() => {
+		process.exit(1)
+	})
+})
